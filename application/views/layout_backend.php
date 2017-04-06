@@ -144,15 +144,20 @@
       <p class="menu-title">BROWSE <span class="pull-right"><a href="javascript:;"><i class="fa fa-refresh"></i></a></span></p>
       <ul>
         <li class="start"> <a href="<?php echo base_url() ?>admin"> <i class="icon-custom-home"></i> <span class="title">Dashboard</span> <span class="selected"></span></a> 
-          
         </li>
-        <li class=""> <a href="javascript:;"> <i class="icon-custom-thumb"></i> <span class="title">Content</span> <span class="arrow"></span> </a>
+<?php foreach ($menu as $submenu) { ?>
+  <?php if( $submenu->sub_menu=='none'){?>
+        <li class=""> <a href="javascript:;"> <i class="<?php echo $submenu->icon ?>"></i> <span class="title"><?php echo $submenu->name_menu ?></span> <span class="arrow"></span> </a>
           <ul class="sub-menu">
-            <li > <a href="<?php echo base_url() ?>admin_content/static_page">Static Page</a> </li>
+          <?php foreach ($menu as $data) {
+            if( $data->sub_menu== $submenu->id){ ?>
+            <li > <a href="<?php echo base_url()."".$submenu->target."/".$data->target ?>"><?php echo $data->name_menu ?></a> </li>
+          <?php } }?>
           </ul>
+        <?php } ?>
         </li>
+<?php } ?>
       </ul>
-      
       <div class="clearfix"></div>
       <!-- END SIDEBAR MENU -->
     </div>

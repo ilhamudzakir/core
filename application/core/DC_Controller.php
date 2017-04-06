@@ -12,6 +12,7 @@ class DC_Controller extends CI_Controller {
         $this->tbl_prefix = 'dc_';
         $this->tbl_static_content= $this->tbl_prefix . 'static_content';
         $this->tbl_user= $this->tbl_prefix . 'user';
+        $this->tbl_menu= $this->tbl_prefix . 'menu';
     }
 
     function name_method($method){
@@ -27,5 +28,10 @@ class DC_Controller extends CI_Controller {
         else{
             return true;
         }
+    }
+
+    function get_menu(){
+        $data=select_all_order($this->tbl_menu,'position','asc');
+        return $data;
     }
 }

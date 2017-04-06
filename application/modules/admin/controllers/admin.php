@@ -13,7 +13,7 @@ class admin extends DC_controller {
 		}else{
 			$method=str_replace('_',' ',$this->router->fetch_method());
 		}
-		$this->controller_attr = array('controller' => 'admin','controller_name' => 'Admin','method'=>ucwords($method));
+		$this->controller_attr = array('controller' => 'admin','controller_name' => 'Admin','method'=>ucwords($method),'menu'=>$this->get_menu());
 	}
 	
 	public function index(){
