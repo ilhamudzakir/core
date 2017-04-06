@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 05, 2017 at 11:18 AM
+-- Generation Time: Apr 06, 2017 at 03:54 PM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 5.6.23
 
@@ -69,6 +69,14 @@ CREATE TABLE `dc_menu` (
   `id_modifier` int(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `dc_menu`
+--
+
+INSERT INTO `dc_menu` (`id`, `name_menu`, `sub_menu`, `target`, `icon`, `position`, `date_created`, `date_modified`, `id_creator`, `id_modifier`) VALUES
+(1, 'Content', 'none', 'admin_content', 'icon-custom-thumb', 1, '2017-04-06 13:29:28', '2017-04-06 07:23:35', 1, 0),
+(2, 'Static Page', '1', 'static_page', '', 1, '2017-04-06 10:24:25', '2017-04-06 12:29:26', 1, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -96,6 +104,15 @@ CREATE TABLE `dc_static_content` (
   `id_creator` int(11) NOT NULL,
   `id_modifier` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `dc_static_content`
+--
+
+INSERT INTO `dc_static_content` (`id`, `title`, `content`, `date_created`, `date_modified`, `id_creator`, `id_modifier`) VALUES
+(12, 'adasd', 'hasjkhajksdsdadas', '0000-00-00 00:00:00', '2017-04-05 16:23:04', 0, 1),
+(13, 'sdf', 'sdfdsfsd', '2017-04-05 16:33:32', NULL, 1, NULL),
+(15, 'd adasd as', 'dadas asd asd as', '2017-04-05 16:33:45', NULL, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -195,7 +212,7 @@ ALTER TABLE `dc_groups`
 -- AUTO_INCREMENT for table `dc_menu`
 --
 ALTER TABLE `dc_menu`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `dc_menu_accsess`
 --
@@ -205,7 +222,7 @@ ALTER TABLE `dc_menu_accsess`
 -- AUTO_INCREMENT for table `dc_static_content`
 --
 ALTER TABLE `dc_static_content`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT for table `dc_user`
 --
