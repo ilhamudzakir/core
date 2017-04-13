@@ -85,6 +85,9 @@ class admin extends DC_controller {
 	}
 
 	 function dashboard(){
+	 	if($this->session->userdata('admin') == FALSE){
+			redirect('admin/login');
+		}
 		$data = $this->controller_attr;
 		$data['page'] = $this->load->view('admin/dashboard',$data,true);
 		$this->load->view('layout_backend',$data);

@@ -13,6 +13,10 @@ class DC_Controller extends CI_Controller {
         $this->tbl_static_content= $this->tbl_prefix . 'static_content';
         $this->tbl_user= $this->tbl_prefix . 'user';
         $this->tbl_menu= $this->tbl_prefix . 'menu';
+        $this->tbl_icons= $this->tbl_prefix . 'icons';
+        $this->tbl_user_groups= $this->tbl_prefix . 'user_groups';
+        $this->tbl_groups= $this->tbl_prefix . 'groups';
+        $this->tbl_user_accsess= $this->tbl_prefix . 'menu_accsess';
     }
 
     function name_method($method){
@@ -31,7 +35,39 @@ class DC_Controller extends CI_Controller {
     }
 
     function get_menu(){
-        $data=select_all_order($this->tbl_menu,'position','asc');
-        return $data;
+        if($this->session->userdata('admin')){
+            $user_groups=$this->session->userdata['admin']['user_group'];
+        }else{
+            $user_groups=0;
+        }
+        $this->db->select($this->tbl_menu.'.*');
+        $this->db->from($this->tbl_menu);
+        $this->db->join($this->tbl_user_accsess,$this->tbl_menu.'.id = '.$this->tbl_user_accsess.'.id_menu');
+        $this->db->where($this->tbl_user_accsess.'.id_group',$user_groups);
+        $this->db->where($this->tbl_user_accsess.'.accsess',1);
+        $this->db->order_by($this->tbl_menu.'.position','ASC');
+        $data=$this->db->get();
+        return $data->result();
+    }
+
+    function check_access(){
+        if($this->session->userdata('admin')){
+            $user_groups=$this->session->userdata['admin']['user_group'];
+        }else{
+            $user_groups=0;
+        }
+        $this->db->select($this->tbl_menu.'.*');
+        $this->db->from($this->tbl_menu);
+        $this->db->join($this->tbl_user_accsess,$this->tbl_menu.'.id = '.$this->tbl_user_accsess.'.id_menu');
+        $this->db->where($this->tbl_user_accsess.'.id_group',$user_groups);
+        $this->db->where($this->tbl_user_accsess.'.accsess',0);
+        $this->db->order_by($this->tbl_menu.'.position','ASC');
+        $data=$this->db->get();
+        $data=$data->result();
+        foreach ($data as $key) {
+            if($key->target==$this->uri->segment(2) or $key->target==$this->uri->segment(1)){
+                redirect('admin/404');
+            }
+        }
     }
 }

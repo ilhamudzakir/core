@@ -24,6 +24,8 @@
 <link href="<?php echo base_url() ?>assets/css/style.css" rel="stylesheet" type="text/css"/>
 <link href="<?php echo base_url() ?>assets/css/responsive.css" rel="stylesheet" type="text/css"/>
 <link href="<?php echo base_url() ?>assets/css/custom-icon-set.css" rel="stylesheet" type="text/css"/>
+<script src="<?php echo base_url() ?>assets/plugins/jquery-1.8.3.min.js" type="text/javascript"></script>
+<script src="<?php echo base_url() ?>assets/plugins/jquery-ui/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>
 <!-- END CSS TEMPLATE -->
 </head>
 <!-- END HEAD -->
@@ -146,7 +148,7 @@
         <li class="start"> <a href="<?php echo base_url() ?>admin"> <i class="icon-custom-home"></i> <span class="title">Dashboard</span> <span class="selected"></span></a> 
         </li>
 <?php foreach ($menu as $submenu) { ?>
-  <?php if( $submenu->sub_menu=='none'){?>
+  <?php if( $submenu->sub_menu==0){?>
         <li class=""> <a href="javascript:;"> <i class="<?php echo $submenu->icon ?>"></i> <span class="title"><?php echo $submenu->name_menu ?></span> <span class="arrow"></span> </a>
           <ul class="sub-menu">
           <?php foreach ($menu as $data) {
@@ -180,8 +182,7 @@
 </div>
 <!-- END CONTAINER -->
 <!-- BEGIN CORE JS FRAMEWORK-->
-<script src="<?php echo base_url() ?>assets/plugins/jquery-1.8.3.min.js" type="text/javascript"></script>
-<script src="<?php echo base_url() ?>assets/plugins/jquery-ui/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>
+
 <script src="<?php echo base_url() ?>assets/plugins/boostrapv3/js/bootstrap.min.js" type="text/javascript"></script>
 <script src="<?php echo base_url() ?>assets/plugins/breakpoints.js" type="text/javascript"></script>
 <script src="<?php echo base_url() ?>assets/plugins/jquery-unveil/jquery.unveil.min.js" type="text/javascript"></script>

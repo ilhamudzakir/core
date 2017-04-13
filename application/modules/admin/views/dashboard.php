@@ -171,7 +171,7 @@
                     <div class="tiles-title"> NOTIFICATIONS </div>
                     <br>
                     <div class="notification-messages info">
-                      <div class="user-profile"> <img src="assets/img/profiles/c.jpg"  alt="" data-src="assets/img/profiles/c.jpg" data-src-retina="assets/img/profiles/c2x.jpg" width="35" height="35"> </div>
+                      <div class="user-profile"> <img src="<?php echo base_url() ?>assets/img/profiles/c.jpg"  alt="" data-src="<?php echo base_url() ?>assets/img/profiles/c.jpg" data-src-retina="assets/img/profiles/c2x.jpg" width="35" height="35"> </div>
                       <div class="message-wrapper">
                         <div class="heading"> David Nester - Commented on your wall </div>
                         <div class="description"> Meeting postponed to tomorrow </div>
@@ -189,7 +189,7 @@
                       <div class="clearfix"></div>
                     </div>
                     <div class="notification-messages success">
-                      <div class="user-profile"> <img src="assets/img/profiles/h.jpg"  alt="" data-src="assets/img/profiles/h.jpg" data-src-retina="assets/img/profiles/h2x.jpg" width="35" height="35"> </div>
+                      <div class="user-profile"> <img src="<?php echo base_url() ?>assets/img/profiles/h.jpg"  alt="" data-src="<?php echo base_url() ?>assets/img/profiles/h.jpg" data-src-retina="assets/img/profiles/h2x.jpg" width="35" height="35"> </div>
                       <div class="message-wrapper">
                         <div class="heading"> You have've got 150 messages </div>
                         <div class="description"> 150 newly unread messages in your inbox </div>
@@ -309,7 +309,7 @@
                   <div class="tiles-body">
                     <div class="row">
                       <div class="user-comment-wrapper col-mid-12">
-                        <div class="profile-wrapper"> <img src="assets/img/profiles/d.jpg"  alt="" data-src="assets/img/profiles/d.jpg" data-src-retina="assets/img/profiles/d2x.jpg" width="35" height="35"> </div>
+                        <div class="profile-wrapper"> <img src="<?php echo base_url() ?>assets/img/profiles/d.jpg"  alt="" data-src="<?php echo base_url() ?>assets/img/profiles/d.jpg" data-src-retina="assets/img/profiles/d2x.jpg" width="35" height="35"> </div>
                         <div class="comment">
                           <div class="user-name"> David <span class="semi-bold">Cooper</span> </div>
                           <div class="preview-wrapper"> What's the progress on the new project? </div>
