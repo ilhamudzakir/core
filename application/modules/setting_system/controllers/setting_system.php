@@ -40,6 +40,7 @@ class setting_system extends DC_controller {
 	}
 
 	function menu_form($id=null){
+		$this->check_access();
 		$data = $this->controller_attr;
 		$data['function']='menu';
 		if ($id) {
@@ -120,6 +121,7 @@ class setting_system extends DC_controller {
 	}
 
 	function user_groups_form($id=null){
+		$this->check_access();
 		$data = $this->controller_attr;
 		$data['function']='user_groups';
 		if ($id) {

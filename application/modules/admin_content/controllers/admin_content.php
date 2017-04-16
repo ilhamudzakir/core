@@ -22,7 +22,7 @@ class admin_content extends DC_controller {
 	}
 	
 	function static_page(){
-		$this->check_access()
+		$this->check_access();
 		$data = $this->controller_attr;
 		$data['function']='static_page';
 		$data['list']=select_all($this->tbl_static_content);
@@ -31,6 +31,7 @@ class admin_content extends DC_controller {
 	}
 
 	function static_page_form($id=null){
+		$this->check_access();
 		$data = $this->controller_attr;
 		$data['function']='static_page';
 		if ($id) {

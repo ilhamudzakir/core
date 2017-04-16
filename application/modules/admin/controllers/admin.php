@@ -55,7 +55,6 @@ class admin extends DC_controller {
 						'user_group' => $admin_user->user_group,
 						);
 					$this->session->set_userdata('admin',$data_user);
-					$this->session->set_userdata('admin',$data_user);
 					redirect('admin/dashboard');
 				}
 				else{
@@ -91,6 +90,91 @@ class admin extends DC_controller {
 		$data = $this->controller_attr;
 		$data['page'] = $this->load->view('admin/dashboard',$data,true);
 		$this->load->view('layout_backend',$data);
+	}
+
+	 function profile(){
+	 	if($this->session->userdata('admin') == FALSE){
+			redirect('admin/login');
+		}
+		$data = $this->controller_attr;
+		$data['function']='profile';
+        $data['data'] = select_where($this->tbl_user,'id',$this->session->userdata['admin']['id'])->row();
+		$data['page'] = $this->load->view('admin/profile',$data,true);
+		$this->load->view('layout_backend',$data);
+	}
+
+	function profile_update(){
+		$data = $this->controller_attr;
+		$data['function']='profile';
+		$id=$this->input->post('id');
+		$table_field = $this->db->list_fields($this->tbl_user);
+		$update = array();
+		$user=select_where($this->tbl_user,'id',$this->session->userdata['admin']['id'])->row();
+        foreach ($table_field as $field) {
+            $update[$field] = $this->input->post($field);
+        }
+        if($update['password']==''){
+           $update['password']=$user->password;
+        }else{
+        	if(md5($this->input->post('old_password'))!=$user->password){
+			$this->session->set_flashdata('notif','error');
+			$this->session->set_flashdata('msg','Sorry, your old password is not match');
+			redirect($data['controller']."/".$data['function']);
+        	}elseif($this->input->post('password')!=$this->input->post('password')){
+        	$this->session->set_flashdata('notif','error');
+			$this->session->set_flashdata('msg','Sorry, your password and confirm password is not match');
+			redirect($data['controller']."/".$data['function']);
+        	}else{
+        		$update['password']=md5($this->input->post('password'));
+        	}
+        }
+        if($update['user_group']==''){
+           $update['user_group']=$user->user_group;
+        }
+        if(empty($_FILES['photo']['name'])){
+        	$update['photo']=$user->photo;
+        }else{
+        	 if (!file_exists('assets/uploads/user-admin/'.$user->id)) {
+    				mkdir('assets/uploads/user-admin/'.$user->id, 0777, true);
+			 }
+        	 $config['upload_path'] = 'assets/uploads/user-admin/'.$user->id;
+             $config['allowed_types'] = 'jpg|jpeg|png|gif';
+             $config['file_name'] = $_FILES['photo']['name'];
+             $this->upload->initialize($config);
+             if($this->upload->do_upload('photo')){
+                    $uploadData = $this->upload->data();
+                   	$update['photo']=$uploadData['file_name'];;
+                   	$file = "assets/uploads/user-admin/".$user->id."/".$user->photo;
+					unlink($file);
+                }else{
+                    echo"error upload";
+                    die();
+                }
+        }
+        $update['date_modified']= date("Y-m-d H:i:s");
+        $update['id_modifier']=$this->session->userdata['admin']['id'];
+        $query=update($this->tbl_user,$update,'id',$id);
+		if($query){
+			$admin_user=select_where($this->tbl_user,'id',$this->session->userdata['admin']['id'])->row();
+			$data_user = array(
+						'id' => $admin_user->id,
+						'username' => $admin_user->username,
+						'email' => $admin_user->email,
+						'password' => $admin_user->password,
+						'first_name' => $admin_user->first_name,
+						'last_name' => $admin_user->last_name,
+						'photo' => $admin_user->photo,
+						'user_group' => $admin_user->user_group,
+			);
+
+			$this->session->set_userdata('admin',$data_user);
+			$this->session->set_flashdata('notif','success');
+			$this->session->set_flashdata('msg','Your data have been updated');
+		}else{
+			$this->session->set_flashdata('notif','error');
+			$this->session->set_flashdata('msg','Your data not updated');
+		}
+		redirect($data['controller']."/".$data['function']);
 	}
 
 }

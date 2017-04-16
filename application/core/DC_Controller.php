@@ -17,6 +17,7 @@ class DC_Controller extends CI_Controller {
         $this->tbl_user_groups= $this->tbl_prefix . 'user_groups';
         $this->tbl_groups= $this->tbl_prefix . 'groups';
         $this->tbl_user_accsess= $this->tbl_prefix . 'menu_accsess';
+        $this->load->model('model_basic');
     }
 
     function name_method($method){
@@ -40,14 +41,8 @@ class DC_Controller extends CI_Controller {
         }else{
             $user_groups=0;
         }
-        $this->db->select($this->tbl_menu.'.*');
-        $this->db->from($this->tbl_menu);
-        $this->db->join($this->tbl_user_accsess,$this->tbl_menu.'.id = '.$this->tbl_user_accsess.'.id_menu');
-        $this->db->where($this->tbl_user_accsess.'.id_group',$user_groups);
-        $this->db->where($this->tbl_user_accsess.'.accsess',1);
-        $this->db->order_by($this->tbl_menu.'.position','ASC');
-        $data=$this->db->get();
-        return $data->result();
+       $data=$this->model_basic->get_menu($user_groups);
+       return $data;
     }
 
     function check_access(){
@@ -56,16 +51,10 @@ class DC_Controller extends CI_Controller {
         }else{
             $user_groups=0;
         }
-        $this->db->select($this->tbl_menu.'.*');
-        $this->db->from($this->tbl_menu);
-        $this->db->join($this->tbl_user_accsess,$this->tbl_menu.'.id = '.$this->tbl_user_accsess.'.id_menu');
-        $this->db->where($this->tbl_user_accsess.'.id_group',$user_groups);
-        $this->db->where($this->tbl_user_accsess.'.accsess',0);
-        $this->db->order_by($this->tbl_menu.'.position','ASC');
-        $data=$this->db->get();
-        $data=$data->result();
+        $data=$this->model_basic->get_menu_access($user_groups);
         foreach ($data as $key) {
-            if($key->target==$this->uri->segment(2) or $key->target==$this->uri->segment(1)){
+            $form=$key->target.'_form';
+            if($key->target==$this->uri->segment(2) or $key->target==$this->uri->segment(1) or $form==$this->uri->segment(2)){
                 redirect('admin/404');
             }
         }

@@ -101,14 +101,14 @@
               </div>
             </div>
           </div>
-          <div class="profile-pic"> <img src="<?php echo base_url() ?>assets/img/profiles/avatar_small.jpg"  alt="" data-src="<?php echo base_url() ?>assets/img/profiles/avatar_small.jpg" data-src-retina="<?php echo base_url() ?>assets/img/profiles/avatar_small2x.jpg" width="35" height="35" /> </div>
+          <div class="profile-pic"> <img src="<?php echo base_url() ?>assets/uploads/user-admin/<?php  if($this->session->userdata['admin']['photo']==''){echo"default.jpg";}else{echo $this->session->userdata['admin']['id']."/".$this->session->userdata['admin']['photo'];} ?>"  alt="" data-src="<?php echo base_url() ?>assets/uploads/user-admin/<?php  if($this->session->userdata['admin']['photo']==''){echo"default.jpg";}else{echo $this->session->userdata['admin']['id']."/".$this->session->userdata['admin']['photo'];} ?>" data-src-retina="<?php echo base_url() ?>assets/uploads/user-admin/<?php  if($this->session->userdata['admin']['photo']==''){echo"default.jpg";}else{echo $this->session->userdata['admin']['id']."/".$this->session->userdata['admin']['photo'];} ?>" width="35" height="35" /> </div>
         </div>
         <ul class="nav quick-section ">
           <li class="quicklinks"> <a data-toggle="dropdown" class="dropdown-toggle  pull-right " href="#" id="user-options">
             <div class="iconset top-settings-dark "></div>
             </a>
             <ul class="dropdown-menu  pull-right" role="menu" aria-labelledby="user-options">
-              <li><a href="user-profile.html"> My Account</a> </li>
+              <li><a href="<?php echo base_url() ?>admin/profile"> My Account</a> </li>
               
               <li class="divider"></li>
               <li><a href="<?php echo base_url() ?>admin/logout"><i class="fa fa-power-off"></i>&nbsp;&nbsp;Log Out</a></li>
@@ -132,7 +132,7 @@
     <!-- BEGIN MINI-PROFILE -->
     <div class="page-sidebar-wrapper scrollbar-dynamic" id="main-menu-wrapper">
       <div class="user-info-wrapper">
-        <div class="profile-wrapper"> <img src="<?php echo base_url() ?>assets/img/profiles/avatar.jpg"  alt="" data-src="<?php echo base_url() ?>assets/img/profiles/avatar.jpg" data-src-retina="<?php echo base_url() ?>assets/img/profiles/avatar2x.jpg" width="69" height="69" /> </div>
+        <div class="profile-wrapper"> <img src="<?php echo base_url() ?>assets/uploads/user-admin/<?php  if($this->session->userdata['admin']['photo']==''){echo"default.jpg";}else{echo $this->session->userdata['admin']['id']."/".$this->session->userdata['admin']['photo'];} ?>"  alt="" data-src="<?php echo base_url() ?>assets/uploads/user-admin/<?php  if($this->session->userdata['admin']['photo']==''){echo"default.jpg";}else{echo $this->session->userdata['admin']['id']."/".$this->session->userdata['admin']['photo'];} ?>" data-src-retina="<?php echo base_url() ?>assets/uploads/user-admin/<?php  if($this->session->userdata['admin']['photo']==''){echo"default.jpg";}else{echo $this->session->userdata['admin']['id']."/".$this->session->userdata['admin']['photo'];} ?>" width="69" height="69" /> </div>
         <div class="user-info">
           <div class="greeting">Welcome</div>
           <div class="username"><?php echo $this->session->userdata['admin']['first_name'] ?> <span class="semi-bold"><?php echo $this->session->userdata['admin']['last_name'] ?></span></div>
