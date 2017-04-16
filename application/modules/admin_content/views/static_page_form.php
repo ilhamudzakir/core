@@ -23,7 +23,7 @@
                         <label class="form-label">Content</label>
                        
                         <div class="controls">
-                           <textarea id="text-editor" name="content" placeholder="Enter text ..." class="form-control" rows="10"><?php if(isset($data)){ echo $data->content; } ?></textarea>
+                           <textarea id="summernote" name="content" placeholder="Enter text ..." class="form-control" rows="10"><?php if(isset($data)){ echo $data->content; } ?></textarea>
                         </div>
                       </div>
                         <div class="form-group">
@@ -38,3 +38,6 @@
               </div>
             </div>
           </div>
+<!-- include libraries(jQuery, bootstrap) -->
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.3/summernote.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.3/summernote.js"></script>

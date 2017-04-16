@@ -3196,7 +3196,7 @@ input[type="checkbox"] {
 }
 select,
 input[type="file"] {
-  height: 34px !important;
+  height: 40px !important;
   line-height: 30px;
 }
 select {
@@ -8224,9 +8224,6 @@ body.rtl .footer-widget {
   }
 }
 
-input[type="file"] {
-    display: none!important;
-}
 
 .ouput_image_input{
   max-height: 300px;
@@ -8236,4 +8233,13 @@ input[type="file"] {
 }
 .pad10{
   padding: 10px
+}
+.note-image-input{
+  display: block!important;
+}
+input[type="file"] {
+    display: none;
+}
+#summernote{
+  min-height: 300px;
 }

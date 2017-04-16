@@ -9,6 +9,8 @@
 <meta content="" name="author" />
 <!-- BEGIN PLUGIN CSS -->
 <link href="<?php echo base_url() ?>assets/plugins/bootstrap-select2/select2.css" rel="stylesheet" type="text/css" media="screen"/>
+
+<link href="<?php echo base_url() ?>assets/plugins/pace/pace-theme-flash.css" rel="stylesheet" type="text/css" media="screen"/>
 <link href="<?php echo base_url() ?>assets/plugins/jquery-datatable/css/jquery.dataTables.css" rel="stylesheet" type="text/css"/>
 <link href="<?php echo base_url() ?>assets/plugins/datatables-responsive/css/datatables.responsive.css" rel="stylesheet" type="text/css" media="screen"/>
 <!-- END PLUGIN CSS -->
@@ -199,6 +201,7 @@
 <!-- END PAGE LEVEL PLUGINS -->
 <script src="<?php echo base_url() ?>assets/js/datatables.js" type="text/javascript"></script>
 <!-- BEGIN CORE TEMPLATE JS -->
+
 
 <script src="<?php echo base_url() ?>assets/plugins/pace/pace.min.js" type="text/javascript"></script>
 <script src="<?php echo base_url() ?>assets/js/core.js" type="text/javascript"></script>

@@ -703,3 +703,9 @@ function unblockUI(el) {
     };
     reader.readAsDataURL(event.target.files[0]);
   };
+
+      $(document).ready(function() {
+        if (document.getElementById('summernote')) {
+        $('#summernote').summernote();
+    }
+    });
