@@ -345,6 +345,18 @@ class setting_system extends DC_controller {
         foreach ($table_field as $field) {
             $update[$field] = $this->input->post($field);
         }
+        $email=select_where($this->tbl_user,'email',$update['email'])->num_rows();
+        if($email>0 and $update['email']!=$user->email){
+        	$this->session->set_flashdata('notif','error');
+			$this->session->set_flashdata('msg','Sorry, email is already registered');
+			redirect($data['controller']."/".$data['function']);
+        }
+        $username=select_where($this->tbl_user,'email',$update['username'])->num_rows();
+        if($username>0 and $update['username']!=$user->username){
+        	$this->session->set_flashdata('notif','error');
+			$this->session->set_flashdata('msg','Sorry, username is already registered');
+			redirect($data['controller']."/".$data['function']);
+        }
         if($this->input->post('password')!=$this->input->post('password')){
         	$this->session->set_flashdata('notif','error');
 			$this->session->set_flashdata('msg','Sorry, your password and confirm password is not match');
@@ -393,7 +405,19 @@ class setting_system extends DC_controller {
         foreach ($table_field as $field) {
             $insert[$field] = $this->input->post($field);
         }
-                if($this->input->post('password')!=$this->input->post('password')){
+        $email=select_where($this->tbl_user,'email',$update['email'])->num_rows();
+        if($email>0){
+        	$this->session->set_flashdata('notif','error');
+			$this->session->set_flashdata('msg','Sorry, email is already registered');
+			redirect($data['controller']."/".$data['function']);
+        }
+        $username=select_where($this->tbl_user,'email',$update['username'])->num_rows();
+        if($username>0){
+        	$this->session->set_flashdata('notif','error');
+			$this->session->set_flashdata('msg','Sorry, username is already registered');
+			redirect($data['controller']."/".$data['function']);
+        }
+           if($this->input->post('password')!=$this->input->post('password')){
         	$this->session->set_flashdata('notif','error');
 			$this->session->set_flashdata('msg','Sorry, your password and confirm password is not match');
 			redirect($data['controller']."/".$data['function']);
