@@ -305,6 +305,144 @@ class setting_system extends DC_controller {
         }
 		echo json_encode($data);
 	}
+
+		function user(){
+		$this->check_access();
+		$data = $this->controller_attr;
+		$data['function']='user';
+		$list=select_all($this->tbl_user);
+		foreach ($list as $key) {
+			$groups=select_where($this->tbl_groups,'id',$key->user_group)->row();
+			$key->groups=$groups->name_group;
+		}
+		$data['list']=$list;
+		$data['page'] = $this->load->view('setting_system/list_'.$data['function'],$data,true);
+		$this->load->view('layout_backend',$data);
+	}
+
+	function user_form($id=null){
+		$this->check_access();
+		$data = $this->controller_attr;
+		$data['function']='user';
+		if ($id) {
+            $data['data'] = select_where($this->tbl_user, 'id', $id)->row();
+        }
+        else{
+            $data['data'] = null;
+        }
+        $data['groups']=select_all($this->tbl_groups);
+		$data['page'] = $this->load->view('setting_system/'.$data['function'].'_form',$data,true);
+		$this->load->view('layout_backend',$data);
+	}
+
+	function user_update(){
+		$data = $this->controller_attr;
+		$data['function']='user';
+		$id=$this->input->post('id');
+		$user=select_where($this->tbl_user,'id',$id)->row();
+		$table_field = $this->db->list_fields($this->tbl_user);
+		$update = array();
+        foreach ($table_field as $field) {
+            $update[$field] = $this->input->post($field);
+        }
+        if($this->input->post('password')!=$this->input->post('password')){
+        	$this->session->set_flashdata('notif','error');
+			$this->session->set_flashdata('msg','Sorry, your password and confirm password is not match');
+			redirect($data['controller']."/".$data['function']);
+        	}else{
+        		$update['password']=md5($this->input->post('password'));
+        }
+        if(empty($_FILES['photo']['name'])){
+        	$update['photo']=$user->photo;
+        }else{
+        	 if (!file_exists('assets/uploads/user-admin/'.$user->id)) {
+    				mkdir('assets/uploads/user-admin/'.$user->id, 0777, true);
+			 }
+        	 $config['upload_path'] = 'assets/uploads/user-admin/'.$user->id;
+             $config['allowed_types'] = 'jpg|jpeg|png|gif';
+             $config['file_name'] = $_FILES['photo']['name'];
+             $this->upload->initialize($config);
+             if($this->upload->do_upload('photo')){
+                    $uploadData = $this->upload->data();
+                   	$update['photo']=$uploadData['file_name'];;
+                   	$file = "assets/uploads/user-admin/".$user->id."/".$user->photo;
+					unlink($file);
+                }else{
+                    echo"error upload";
+                    die();
+                }
+        }
+        $update['date_modified']= date("Y-m-d H:i:s");
+        $update['id_modifier']=$this->session->userdata['admin']['id'];
+        $query=update($this->tbl_user,$update,'id',$id);
+		if($query){
+			$this->session->set_flashdata('notif','success');
+			$this->session->set_flashdata('msg','Your data have been updated');
+		}else{
+			$this->session->set_flashdata('notif','error');
+			$this->session->set_flashdata('msg','Your data not updated');
+		}
+		redirect($data['controller']."/".$data['function']);
+	}
+
+	function user_add(){
+		$data = $this->controller_attr;
+		$data['function']='user';
+		$table_field = $this->db->list_fields($this->tbl_user);
+		$insert = array();
+        foreach ($table_field as $field) {
+            $insert[$field] = $this->input->post($field);
+        }
+                if($this->input->post('password')!=$this->input->post('password')){
+        	$this->session->set_flashdata('notif','error');
+			$this->session->set_flashdata('msg','Sorry, your password and confirm password is not match');
+			redirect($data['controller']."/".$data['function']);
+        	}else{
+        		$insert['password']=md5($this->input->post('password'));
+        }
+        if(empty($_FILES['photo']['name'])){
+        	$insert['photo']=='';
+        }else{
+        	 $insert['photo']=$_FILES['photo']['name'];
+        }
+        $insert['date_created']= date("Y-m-d H:i:s");
+        $insert['id_creator']=$this->session->userdata['admin']['id'];
+        $query=insert_all($this->tbl_user,$insert);
+		if($query){
+			if (!file_exists('assets/uploads/user-admin/'.$this->db->insert_id())) {
+    				mkdir('assets/uploads/user-admin/'.$this->db->insert_id(), 0777, true);
+			 }
+        	 $config['upload_path'] = 'assets/uploads/user-admin/'.$this->db->insert_id();
+             $config['allowed_types'] = 'jpg|jpeg|png|gif';
+             $config['file_name'] = $_FILES['photo']['name'];
+             $this->upload->initialize($config);
+             if($this->upload->do_upload('photo')){
+                    $uploadData = $this->upload->data();
+                }else{
+                    echo"error upload";
+                    die();
+                }
+			$this->session->set_flashdata('notif','success');
+			$this->session->set_flashdata('msg','Your data have been added');
+		}else{
+			$this->session->set_flashdata('notif','error');
+			$this->session->set_flashdata('msg','Your data not added');
+		}
+		redirect($data['controller']."/".$data['function']);
+	}
+
+	function user_delete($id){
+		$data = $this->controller_attr;
+		$function='user';
+		$query=delete($this->tbl_user,'id',$id);
+		if($query){
+			$this->session->set_flashdata('notif','success');
+			$this->session->set_flashdata('msg','Your data have been deleted');
+		}else{
+			$this->session->set_flashdata('notif','error');
+			$this->session->set_flashdata('msg','Your data not deleted');
+		}
+	}
 	
 }
 
