@@ -30,6 +30,7 @@
                <?php
                 $no=0;
                 foreach ($list as $data) {
+                if($data->user_group!='1'){
                 $no++;
                 ?>
                   <tr>
@@ -41,7 +42,7 @@
                     <a href="<?php echo base_url()."".$controller."/".$function."_form/"."".$data->id; ?>" ><button   data-toggle="tooltip" data-original-title="Edit" class="btn btn-warning btn-xs btn-mini tip" type="button"><i class="fa fa-pencil"></i></button></a> 
                     <button id="del<?php echo $data->id ?>"  data-toggle="tooltip" data-original-title="Delete" onclick="pasdel_id('<?php echo $data->id ?>')" class="delete btn btn-danger btn-xs btn-mini tip" type="button"><i class="fa fa-times"></i></button> </td>
                   </tr>
-                  <?php } ?>
+                  <?php }} ?>
                 </tbody>
               </table>
             </div>
