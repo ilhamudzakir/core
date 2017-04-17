@@ -3,11 +3,13 @@
 <head>
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <meta charset="utf-8" />
-<title><?php echo $controller_name; if($method!='index'){echo" - ";} echo $method; ?> | Decode</title>
+<title><?php  echo $method; if($method!='index'){echo" - ";} echo $controller_name;  ?> | <?php echo $this->appearance->name ?></title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <meta content="" name="description" />
 <meta content="" name="author" />
 <!-- BEGIN PLUGIN CSS -->
+
+<link rel="icon" type="image/png" href="<?php echo base_url()."assets/uploads/settings/favicon.png" ?>" sizes="16x16">
 <link href="<?php echo base_url() ?>assets/plugins/bootstrap-select2/select2.css" rel="stylesheet" type="text/css" media="screen"/>
 
 <link href="<?php echo base_url() ?>assets/plugins/pace/pace-theme-flash.css" rel="stylesheet" type="text/css" media="screen"/>
@@ -44,7 +46,7 @@
           </a> </li>
       </ul>
       <!-- BEGIN LOGO -->
-      <a href="<?php echo base_url() ?>admin"><img src="<?php echo base_url() ?>assets/img/logo.png" class="logo" alt=""  data-src="<?php echo base_url() ?>assets/img/logo.png" data-src-retina="<?php echo base_url() ?>assets/img/logo2x.png" width="100px" /></a>
+      <a href="<?php echo base_url() ?>admin"><img src="<?php echo base_url() ?>assets/img/logo.png" class="logo" alt=""  data-src="<?php echo base_url() ?>assets/uploads/settings/<?php echo $this->appearance->logo ?>" data-src-retina="<?php echo base_url() ?>assets/img/logo2x.png" width="100px" /></a>
       <!-- END LOGO -->
       <ul class="nav pull-right notifcation-center">
         <li class="dropdown" id="header_task_bar"> <a href="<?php echo base_url() ?>admin" class="dropdown-toggle active" data-toggle="">

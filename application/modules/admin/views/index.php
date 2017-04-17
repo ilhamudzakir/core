@@ -36,7 +36,7 @@
 <?php } ?> 
         <div class="col-md-7 col-md-offset-2 tiles white no-padding">
      <div class="p-t-30 p-l-40 p-b-20 xs-p-t-10 xs-p-l-10 xs-p-b-10 text-center"> 
-         <img src="<?php echo base_url() ?>assets/img/logo.png" width="50%" >
+         <img src="<?php echo base_url() ?>assets/uploads/settings/<?php echo $this->appearance->logo ?>" width="50%" >
         </div>
     <div class="tiles grey p-t-20 p-b-20 text-black">
       <form id="frm_login" class="animated fadeIn" action="<?php echo base_url() ?>admin/do_login" method="post">

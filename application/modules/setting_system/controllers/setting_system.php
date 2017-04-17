@@ -468,6 +468,58 @@ class setting_system extends DC_controller {
 			$this->session->set_flashdata('msg','Your data not deleted');
 		}
 	}
+
+	function appearance(){
+		$this->check_access();
+		$data = $this->controller_attr;
+		$data['function']='appearance';
+		$data['data']=select_where($this->tbl_appearance,'id',1)->row();
+		$data['page'] = $this->load->view('setting_system/'.$data['function'].'_form',$data,true);
+		$this->load->view('layout_backend',$data);
+	}
+
+	function appearance_update(){
+		$data = $this->controller_attr;
+		$data['function']='appearance';
+		$id=$this->input->post('id');
+		$appearance=select_where($this->tbl_appearance,'id',$id)->row();
+		$table_field = $this->db->list_fields($this->tbl_appearance);
+		$update = array();
+        foreach ($table_field as $field) {
+            $update[$field] = $this->input->post($field);
+        }
+        if(empty($_FILES['logo']['name'])){
+        	$update['logo']=$appearance->logo;
+        }else{
+        	 if (!file_exists('assets/uploads/settings')) {
+    				mkdir('assets/uploads/settings', 0777, true);
+			 }
+        	 $config['upload_path'] = 'assets/uploads/settings';
+             $config['allowed_types'] = 'jpg|jpeg|png|gif';
+             $config['file_name'] = $_FILES['logo']['name'];
+             $this->upload->initialize($config);
+             if($this->upload->do_upload('logo')){
+                    $uploadData = $this->upload->data();
+                   	$update['logo']=$uploadData['file_name'];;
+                   	$file = "assets/uploads/settings/".$appearance->logo;
+					unlink($file);
+                }else{
+                    echo"error upload";
+                    die();
+                }
+        }
+        $update['date_modified']= date("Y-m-d H:i:s");
+        $update['id_modifier']=$this->session->userdata['admin']['id'];
+        $query=update($this->tbl_appearance,$update,'id',$id);
+		if($query){
+			$this->session->set_flashdata('notif','success');
+			$this->session->set_flashdata('msg','Your data have been updated');
+		}else{
+			$this->session->set_flashdata('notif','error');
+			$this->session->set_flashdata('msg','Your data not updated');
+		}
+		redirect($data['controller']."/".$data['function']);
+	}
 	
 }
 
