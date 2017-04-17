@@ -42,7 +42,7 @@
                        <div class="form-group">
                         <label class="form-label">Icon</label>
                         <div class="controls">
-                        <select required class="form-control" name="icon">
+                        <select required class="select2 form-control" name="icon">
                           <option value="none">none</option>
                           <?php foreach ($icon as $key) { ?>
                           <option <?php if( $data and  $key->name_icons== $data->icon){echo"selected";} ?> value="<?php echo $key->name_icons ?>"><span class="<?php echo $key->name_icons ?>"></span><?php echo $key->name_icons ?></option>

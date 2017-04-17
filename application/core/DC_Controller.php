@@ -17,6 +17,7 @@ class DC_Controller extends CI_Controller {
         $this->tbl_user_groups= $this->tbl_prefix . 'user_groups';
         $this->tbl_groups= $this->tbl_prefix . 'groups';
         $this->tbl_user_accsess= $this->tbl_prefix . 'menu_accsess';
+        $this->tbl_news= $this->tbl_prefix . 'news';
         $this->load->model('model_basic');
     }
 

@@ -708,4 +708,10 @@ function unblockUI(el) {
         if (document.getElementById('summernote')) {
         $('#summernote').summernote();
     }
+     $('.select2').select2();
+     $('.datepicker').datepicker(
+        {
+    format: 'yyyy-mm-dd',
+        }
+        );
     });

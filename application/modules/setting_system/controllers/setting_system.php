@@ -433,6 +433,7 @@ class setting_system extends DC_controller {
         $insert['id_creator']=$this->session->userdata['admin']['id'];
         $query=insert_all($this->tbl_user,$insert);
 		if($query){
+			if(!empty($_FILES['photo']['name'])){
 			if (!file_exists('assets/uploads/user-admin/'.$this->db->insert_id())) {
     				mkdir('assets/uploads/user-admin/'.$this->db->insert_id(), 0777, true);
 			 }
@@ -445,7 +446,7 @@ class setting_system extends DC_controller {
                 }else{
                     echo"error upload";
                     die();
-                }
+                } }
 			$this->session->set_flashdata('notif','success');
 			$this->session->set_flashdata('msg','Your data have been added');
 		}else{
