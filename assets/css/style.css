@@ -8243,3 +8243,13 @@ input[type="file"] {
 #summernote{
   min-height: 300px;
 }
+#loading-image{
+  position: absolute; 
+  top: 50%; 
+  left: 45%; 
+  display: none;
+}
+.border-line-top{
+  border-top:3px solid #1b1e24; 
+  margin-bottom: 20px
+}

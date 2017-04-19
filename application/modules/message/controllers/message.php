@@ -30,15 +30,15 @@ class message extends DC_controller {
 		$this->load->view('layout_backend',$data);
 	}
 
-	function compose($id=null){
+	function compose($email=null){
 		$this->check_access();
 		$data = $this->controller_attr;
 		$data['function']='inbox';
-		if ($id) {
-            $data['data'] = select_where($this->tbl_contact, 'id', $id)->row();
+		if ($email) {
+            $data['email'] = $email;
         }
         else{
-            $data['data'] = null;
+            $data['email'] = null;
         }
 		$data['page'] = $this->load->view('message/inbox_form',$data,true);
 		$this->load->view('layout_backend',$data);

@@ -173,6 +173,7 @@
   <!-- END SIDEBAR -->
   <!-- BEGIN PAGE CONTAINER-->
   <div class="page-content">
+  <img id="loading-image" src="<?php echo base_url() ?>assets/img/loading.gif">
     <div class="content">
       <ul class="breadcrumb">
         <li>

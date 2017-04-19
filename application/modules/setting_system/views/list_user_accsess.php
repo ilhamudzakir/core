@@ -32,10 +32,10 @@
                </div>
                       </div>
               <div class="form-group">
-             <div id="content_ajax" style="border-top:3px solid #1b1e24; margin-bottom: 20px"></div>
+             <div id="content_ajax" class="border-line-top"></div>
              
             </div>
-            <div class="form-group">
+            <div class="form-group" id="button-access">
 <div class="controls">
 <button class="btn btn-primary" type="submit">Submit</button>
 </div>

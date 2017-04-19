@@ -4,6 +4,8 @@ $( document ).ready(function() {
     var controller=$( "#controller" ).val();
     var method=$( "#method" ).val();
 
+    $("#button-access").css('display','none');
+
 $( "#group_id" ).change(function() {
   id= $( "#group_id" ).val();
   if(id==''){
@@ -18,10 +20,14 @@ $( "#group_id" ).change(function() {
     cache: false,
     processData: false,
     dataType: "json",
+    beforeSend: function() {
+              $("#loading-image").css( "display", "block" );
+              $("#button-access").css('display','none');
+           },
     success: function(data) {
-
+    $("#loading-image").css( "display", "none" );
     $("#content_ajax").html(data);
-    
+    $("#button-access").css('display','block');
     },
     error: function(jqXHR, textStatus, errorThrown, data) {
       alert('error');
