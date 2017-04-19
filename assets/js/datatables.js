@@ -263,7 +263,7 @@ $(document).ready(function() {
 			"sInfo": "Showing <b>_START_ to _END_</b> of _TOTAL_ entries"
 		},
     });
-	$("div.toolbar").html('<div class="table-tools-actions"><a href="'+$('#method').val()+'_form"><button class="btn btn-primary" style="margin-left:12px">Add</button></a></div>');
+	$("div.toolbar").html('<div class="table-tools-actions"><a id="add_button" href="'+$('#method').val()+'_form"><button class="btn btn-primary" style="margin-left:12px">Add</button></a></div>');
 	
 	$('.delete').on( "click",function() {
 		$("#quick-access").css("display","block");

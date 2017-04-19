@@ -19,7 +19,7 @@ function get_client_ip_server() {
         return $ipaddress;
 	}
 
-	function get_bln_news($date){
+	function get_bln($date){
 		$bln=substr($date, 5,2);
 		$tgl=substr($date, 8,2);
 		$thn=substr($date, 0,4);
@@ -28,10 +28,15 @@ function get_client_ip_server() {
  		$date=$monthName." ".$tgl.", ".$thn;
  		return $date;
 	}
+
+	function get_date($date){
+		$yrdata= strtotime($date);
+    	return date('D, d M Y ', $yrdata);
+	}
 	function get_name_admin($id){
 		$CI =& get_instance();
    		$CI->load->database(); 
-		$query=$CI->db->query("select * from si_user where id='7'")->row();
+		$query=$CI->db->query("select * from ".$this->tbl_user." where id='".$id."'")->row();
 		$name=$query->username;
 		return $name;
 	}
